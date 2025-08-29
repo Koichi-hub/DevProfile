@@ -34,13 +34,13 @@ try
         configurator.AddTrigger(opts => opts
             .ForJob(jobKey)
             .WithIdentity("SendWishJob-trigger-1")
-            .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(22, 0).InTimeZone(TimeZoneInfo.FromSerializedString("Asia/Yekaterinburg")))
+            .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(22, 0).InTimeZone(TimeZoneInfo.FindSystemTimeZoneById("Asia/Yekaterinburg")))
         );
 
         configurator.AddTrigger(opts => opts
             .ForJob(jobKey)
             .WithIdentity("SendWishJob-trigger-2")
-            .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(7, 0).InTimeZone(TimeZoneInfo.FromSerializedString("Asia/Yekaterinburg")))
+            .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(7, 0).InTimeZone(TimeZoneInfo.FindSystemTimeZoneById("Asia/Yekaterinburg")))
         );
     });
     builder.Services.AddQuartzHostedService(options =>

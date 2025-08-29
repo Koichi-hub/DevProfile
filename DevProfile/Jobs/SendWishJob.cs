@@ -10,7 +10,7 @@ namespace DevProfile.Jobs
         {
             logger.LogInformation("Собираюсь отправить пожелание");
 
-            DateTime localTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FromSerializedString("Asia/Yekaterinburg"));
+            DateTime localTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Asia/Yekaterinburg"));
 
             if (localTime.Hour == 7)
             {
