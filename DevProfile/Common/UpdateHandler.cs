@@ -7,7 +7,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace DevProfile.Common;
 
-public class UpdateHandler(ITelegramBotClient bot, ILogger<UpdateHandler> logger) : IUpdateHandler
+public class UpdateHandler(ITelegramBotClient bot, ILogger<UpdateHandler> logger, InMemoryData inMemoryData) : IUpdateHandler
 {
     public async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, HandleErrorSource source, CancellationToken cancellationToken)
     {
@@ -32,6 +32,9 @@ public class UpdateHandler(ITelegramBotClient bot, ILogger<UpdateHandler> logger
     {
         if (msg.Text is not { } messageText)
             return;
+
+        if (!inMemoryData.ChatsIds.Contains(msg.Chat.Id))
+            inMemoryData.ChatsIds.Add(msg.Chat.Id);
 
         await (messageText.Split(' ')[0] switch
         {
