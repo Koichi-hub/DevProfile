@@ -1,5 +1,6 @@
 using DevProfile.Common;
 using DevProfile.Jobs;
+using DevProfile.Services;
 using Microsoft.Extensions.Options;
 using NLog;
 using NLog.Extensions.Logging;
@@ -56,6 +57,9 @@ try
             TelegramBotClientOptions options = new(appSettings.BotToken);
             return new TelegramBotClient(options, httpClient);
         });
+
+    //Services
+    builder.Services.AddTransient<AnimeService>();
 
     builder.Services.AddScoped<UpdateHandler>();
     builder.Services.AddScoped<ReceiverService>();
